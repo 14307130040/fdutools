@@ -1,0 +1,148 @@
+<div class="container-fluid row">
+  <div class="row container">
+    <form class="navbar-form navbar-left" role="search">
+      <button type="button" name="button" class="btn btn-default" id="fetch"><i class="glyphicon glyphicon-refresh"></i>拉取信件</button>
+      <button type="button" name="button" class="btn btn-default" id="write" data-toggle="modal" data-target="#newMail"><i class="glyphicon glyphicon-edit"></i>写信</button>
+    </form>
+  </div>
+  <hr />
+  <div id="display" class="container row">
+    <div id="summary" class="col-md-6" style="">
+      <table class="container-fluid table table-hover table-striped" style="word-break: break-all;">
+        <thead>
+          <th>发件人</th><th>主题</th><th>日期</th>
+        </thead>
+        <tbody style="">
+        </tbody>
+      </table>
+    </div>
+    <div id="detail" class="col-md-6" style="">
+      <table class="container-fluid table">
+        <thead>
+          <th>详情</th>
+        </thead>
+        <tbody style="">
+          <tr><td><div>detail</div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="newMail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">新的信件</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="from">发件人名称</label>
+            <input type="text" class="form-control" id="from" placeholder="发件人名称" />
+          </div>
+          <div class="form-group">
+            <label for="subject">标题</label>
+            <input type="text" class="form-control" id="subject" placeholder="标题" />
+          </div>
+          <div class="form-group">
+            <label for="to">收件人</label>
+            <input type="text" class="form-control" id="to" placeholder="收件人" />
+          </div>
+          <div class="form-group">
+            <label for="cc">抄收</label>
+            <input type="text" class="form-control" id="cc" placeholder="抄收" />
+          </div>
+          <div class="form-group">
+            <ul id="attachments_element"></ul>
+            <button id="attacher" class="btn btn-default" type="button"><i class="glyphicon glyphicon-plus"></i>添加附件</label>
+          </div>
+          <div class="form-group">
+            <label for="editor">内容</label>
+            <div class="btn-toolbar" data-role="editor-toolbar" data-target="#editor">
+              <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font">
+                  <i class="glyphicon glyphicon-font"></i><b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a data-edit="fontName Serif" style="font-family:'Serif'">Serif</a></li>
+                  <li><a data-edit="fontName Sans" style="font-family:'Sans'">Sans</a></li>
+                  <li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li>
+                  <li><a data-edit="fontName Arial Black" style="font-family:'Arial Black'">Arial Black</a></li>
+                  <li><a data-edit="fontName Courier" style="font-family:'Courier'">Courier</a></li>
+                  <li><a data-edit="fontName Courier New" style="font-family:'Courier New'">Courier New</a></li>
+                  <li><a data-edit="fontName Comic Sans MS" style="font-family:'Comic Sans MS'">Comic Sans MS</a></li>
+                  <li><a data-edit="fontName Helvetica" style="font-family:'Helvetica'">Helvetica</a></li>
+                  <li><a data-edit="fontName Impact" style="font-family:'Impact'">Impact</a></li>
+                  <li><a data-edit="fontName Lucida Grande" style="font-family:'Lucida Grande'">Lucida Grande</a></li>
+                  <li><a data-edit="fontName Lucida Sans" style="font-family:'Lucida Sans'">Lucida Sans</a></li>
+                  <li><a data-edit="fontName Tahoma" style="font-family:'Tahoma'">Tahoma</a></li>
+                  <li><a data-edit="fontName Times" style="font-family:'Times'">Times</a></li>
+                  <li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a></li>
+                  <li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li>
+                </ul>
+              </div>
+              <div class="btn-group">
+                <a class="btn dropdown-toggle" data-toggle="dropdown" title="Font Size">
+                  <i class="glyphicon glyphicon-text-height"></i>&nbsp;<b class="caret"></b>
+                </a>
+                  <ul class="dropdown-menu">
+                  <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+                  <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+                  <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+                  </ul>
+              </div>
+              <div class="btn-group">
+                <a class="btn" data-edit="bold" title="Bold (Ctrl/Cmd+B)"><i class="glyphicon glyphicon-bold"></i></a>
+                <a class="btn" data-edit="italic" title="Italic (Ctrl/Cmd+I)"><i class="glyphicon glyphicon-italic"></i></a>
+                <a class="btn" data-edit="strikethrough" title="Strikethrough"><i class="glyphicon glyphicon-remove"></i></a>
+                <a class="btn" data-edit="underline" title="Underline (Ctrl/Cmd+U)"><i class="glyphicon glyphicon-console"></i></a>
+              </div>
+              <div class="btn-group">
+                <a class="btn" data-edit="insertunorderedlist" title="Bullet list"><i class="glyphicon glyphicon-list"></i></a>
+                <a class="btn" data-edit="insertorderedlist" title="Number list"><i class="glyphicon glyphicon-sort-by-order"></i></a>
+                <a class="btn" data-edit="outdent" title="Reduce indent (Shift+Tab)"><i class="glyphicon glyphicon-indent-left"></i></a>
+                <a class="btn" data-edit="indent" title="Indent (Tab)"><i class="glyphicon glyphicon-indent-right"></i></a>
+              </div>
+              <div class="btn-group">
+                <a class="btn" data-edit="justifyleft" title="Align Left (Ctrl/Cmd+L)"><i class="glyphicon glyphicon-align-left"></i></a>
+                <a class="btn" data-edit="justifycenter" title="Center (Ctrl/Cmd+E)"><i class="glyphicon glyphicon-align-center"></i></a>
+                <a class="btn" data-edit="justifyright" title="Align Right (Ctrl/Cmd+R)"><i class="glyphicon glyphicon-align-right"></i></a>
+                <a class="btn" data-edit="justifyfull" title="Justify (Ctrl/Cmd+J)"><i class="glyphicon glyphicon-align-justify"></i></a>
+              </div>
+              <div class="btn-group">
+        		  <a class="btn dropdown-toggle" data-toggle="dropdown" title="Hyperlink"><i class="glyphicon glyphicon-link"></i></a>
+        		    <div class="dropdown-menu input-append">
+        			    <input class="form-control" placeholder="URL" type="text" data-edit="createLink"/>
+        			    <button class="btn btn-default" type="button">Add</button>
+                </div>
+                <a class="btn" data-edit="unlink" title="Remove Hyperlink"><i class="glyphicon glyphicon-scissors"></i></a>
+              </div>
+
+              <div class="btn-group">
+                <a href="javascript:void(0);" class="btn" title="Insert picture (or just drag & drop)" id="pictureBtn" onclick="$(this).siblings('input').trigger('click')">
+                  <i class="glyphicon glyphicon-picture"></i>
+                </a>
+                <input type="file" data-role="magic-overlay" data-target="#pictureBtn" data-edit="insertImage" style="display: none"/>
+              </div>
+              <div class="btn-group">
+                <a class="btn" data-edit="undo" title="Undo (Ctrl/Cmd+Z)"><i class="glyphicon glyphicon-arrow-left"></i></a>
+                <a class="btn" data-edit="redo" title="Redo (Ctrl/Cmd+Y)"><i class="glyphicon glyphicon-arrow-right"></i></a>
+              </div>
+            </div>
+            <div class="form-control" id="editor" style="overflow: scroll; height: 280px">
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button id="send" type="button" class="btn btn-primary" data-toggle="modal" data-target="#newMail">发送</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="mail/mail.coffee"></script>

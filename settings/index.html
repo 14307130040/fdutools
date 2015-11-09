@@ -1,0 +1,30 @@
+<div class="container-fluid row">
+  <form>
+    <div class="form-group">
+      <label for="uid">学号</label>
+      <input type="text" class="form-control" id="uid" placeholder="学号" />
+    </div>
+    <div class="form-group">
+      <label for="uis_password">uis密码</label>
+      <input type="password" class="form-control" id="uis_password" placeholder="uis密码" />
+    </div>
+    <div class="form-group">
+      <label for="mail_password">邮箱密码</label>
+      <input type="password" class="form-control" id="mail_password" placeholder="邮箱密码" />
+    </div>
+    <button id="save" type="button" class="btn btn-primary">保存</button>
+  </form>
+</div>
+<script type="text/javascript">
+  $("#uid").val(student.uid);
+  $("#uis_password").val(student.uis_password);
+  $("#mail_password").val(student.mail_password);
+  $("#save").click(function () {
+    student.uid = $("#uid").val();
+    student.uis_password = $("#uis_password").val();
+    student.mail_password = $("#mail_password").val();
+    student.mail_address = $("#mail_address").val();
+    student.save();
+    flashTip("保存成功");
+  });
+</script>
