@@ -80,7 +80,10 @@ class Sender
       m.fetchDetail 'INBOX', $(this).attr('data-seqno'), (emlFile) ->
         mailparser = new MailParser showAttachmentLinks: true, streamAttachments: true
         mailparser.on "end", (mail_object) ->
-          html = mail_object.html.replace /src="cid:(.*)"/g, "src=\"file:#{tmpdir}#{path.sep}$1\"" if mail_object.html
+          re = /src="cid:(.*)"/g
+          if html = mail_object.html
+            while html.search(re) != -1
+              html = html.replace re, "src=\"file:#{tmpdir}#{path.sep}$1\""
           $("\#detail td div").html html ? mail_object.text
 
         mailparser.on "attachment", (attachment, mail) ->
